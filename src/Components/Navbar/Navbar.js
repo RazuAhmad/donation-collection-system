@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.jpg";
+import logo from "../../images/logo.png";
 
 export default function NavigationBar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -65,7 +65,11 @@ export default function NavigationBar() {
 
       {/* This is donate now button */}
       <Link to="/donateNow">
-        <Button variant="gradient" size="md" className=" lg:inline-block">
+        <Button
+          variant=""
+          size="md"
+          className=" lg:inline-block bg-orange-400 hover:bg-green-800"
+        >
           <span>Donate Now</span>
         </Button>
       </Link>
@@ -77,16 +81,15 @@ export default function NavigationBar() {
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 bg-green-300 border border-b-1 border-blue-500">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="flex items-center font-bold cursor-pointer">
-            <img src={logo} alt="nav logo" className="w-12 mr-1" />
-            Donation System
+            <img src={logo} alt="nav logo" className="w-20 md:w-28 mr-1" />
           </div>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <Link to="/registerNow">
               <Button
-                variant="gradient"
+                variant=""
                 size="md"
-                className="hidden lg:inline-block"
+                className="hidden lg:inline-block hover:bg-red-600"
               >
                 <span>Sign Up</span>
               </Button>
@@ -132,7 +135,11 @@ export default function NavigationBar() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button variant="gradient" size="md" fullWidth className="mb-2">
+          <Button
+            variant="gradient"
+            size="md"
+            className="mb-2 hover:bg-green-400"
+          >
             <span>Sign Up</span>
           </Button>
         </MobileNav>

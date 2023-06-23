@@ -9,7 +9,7 @@ import RegisterPage from "./Components/RegisterPage/RegisterPage";
 
 function App() {
   return (
-    <div>
+    <div className="h-full w-full bg-gradient-to-r from-blue-700 to-purple-400">
       <NavigationBar />
       <Routes>
         <Route path="/home" element={<Home />} />
