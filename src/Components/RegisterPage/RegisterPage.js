@@ -5,9 +5,18 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
  
 export default function RegisterPage() {
+
+  const { register, handleSubmit, reset, setValue,formState: { errors } } = useForm();
+
+  const onSubmit =(data)=>{
+    console.log(data);
+}
+
+
   return (
     <div className="bg-blend-darken">
       <Card color="transparent" shadow={false} className="py-10 ">
@@ -17,13 +26,18 @@ export default function RegisterPage() {
       <Typography color="white" className="mt-1 font-normal text-center">
         Enter your details to register.
       </Typography>
-      <form className="mt-8 m-auto mb-2 w-80 max-w-screen-lg sm:w-96 ">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 m-auto mb-2 w-80 max-w-screen-lg sm:w-96 ">
         <div className="mb-4 flex flex-col gap-6 text-white">
-          <Input size="lg" label="Name" />
-          <Input size="lg" label="Email" />
-          <Input type="password" size="lg" label="Password" />
+          <Input size="lg" label="Name" type="text" {...register('name', { required: true })}
+            error={!!errors.name} />
+
+          <Input size="lg" label="Email" type="email" {...register('email', { required: true })}
+            error={!!errors.email} />
+
+          <Input type="password"  size="lg" label="Password" {...register('password', { required: true })}
+            error={!!errors.password}/>
         </div>
-        <Checkbox
+        <Checkbox required
           label={
             (
               <Typography
@@ -43,7 +57,7 @@ export default function RegisterPage() {
           }
           containerProps={{ className: "-ml-2.5" }}
         />
-        <Button className="mt-6" fullWidth>
+        <Button type="submit" className="mt-6" fullWidth>
           Register
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
