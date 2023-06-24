@@ -135,13 +135,17 @@ export default function NavigationBar() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button
-            variant="gradient"
-            size="md"
-            className="mb-2 hover:bg-green-400"
-          >
-            <span>Sign Up</span>
-          </Button>
+
+          <Link to="/registerNow">
+            <Button
+              variant="gradient"
+              size="md"
+              className="mb-2 hover:bg-green-400"
+              onClick={() => setOpenNav(!openNav)}
+            >
+              <span>Sign Up</span>
+            </Button>
+          </Link>
         </MobileNav>
       </Navbar>
     </>
