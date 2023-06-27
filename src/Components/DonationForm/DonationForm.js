@@ -1,25 +1,56 @@
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Typewriter from "typewriter-effect";
 
 function DonationForm() {
   const { register, handleSubmit, reset, setValue, control } = useForm();
   const { id } = useParams();
 
+  const notify = () => toast("Successfully recieved donation");
+
   const onSubmit = (data) => {
+    const currentDate = new Date();
+    data.date = currentDate.toLocaleDateString();
+    data.time = currentDate.toLocaleTimeString();
+
+    fetch("http://localhost:5000/donators", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((dataConfirmation) => {
+        if (dataConfirmation.acknowledged) {
+          notify();
+        }
+      });
+
     console.log(data);
   };
 
   return (
     <>
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 h-full">
         <h2 className="text-3xl font-semibold mb-4 text-white text-center mt-9">
           Make a Donation
         </h2>
         <h3 className=" font-semibold mb-4 text-white text-center ">
-          Let's bring a change together
+          <Typewriter
+            options={{
+              strings: ["Let's bring a change", "together"],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </h3>
       </div>
+
+      <ToastContainer />
 
       {/* Form starts from here */}
       <form
@@ -33,46 +64,37 @@ function DonationForm() {
           <input
             type="text"
             id="name"
+            placeholder="enter your name"
             className="w-full border border-blue-900 rounded px-3 py-2"
             {...register("name")}
             required
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="email" className="block mb-2 font-medium">
             Email
           </label>
           <input
             type="email"
             id="email"
+            placeholder="enter your email"
             className="w-full border border-blue-900 rounded px-3 py-2"
             {...register("email")}
             required
           />
-        </div>
+        </div> */}
         <div className="mb-4">
           <label htmlFor="category" className="block mb-2 font-medium">
             Category of Donation
           </label>
-          {/* <select
-            id="category"
-            className="w-full border border-blue-900 rounded px-3 py-2"
-            {...register("category")}
-            required
-            defaultValue={id}
-          >
-            <option value="">Select category</option>
-            <option value="mosqueComplex">Mosque Complex</option>
-            <option value="zakat">Zakat</option>
-            <option value="flood">Flood Appeal</option>
-          </select> */}
 
           <Controller
-            name="selectedOption"
+            name="donationCategory"
             control={control}
             defaultValue={id}
             render={({ field }) => (
               <select
+                required
                 {...field}
                 className="w-full border border-blue-900 rounded px-3 py-2"
               >
@@ -91,6 +113,7 @@ function DonationForm() {
           <input
             type="number"
             id="amount"
+            placeholder="enter your amount"
             className="w-full border border-blue-900 rounded px-3 py-2"
             {...register("amount")}
             required

@@ -13,6 +13,20 @@ export default function RegisterPage() {
   const { register, handleSubmit, reset, setValue,formState: { errors } } = useForm();
 
   const onSubmit =(data)=>{
+
+    fetch('http://localhost:5000/register',{
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+
+    })
+
     console.log(data);
 }
 
