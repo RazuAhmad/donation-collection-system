@@ -1,34 +1,45 @@
 import {
     Button,
     Card,
-    Checkbox,
     Input,
     Typography,
   } from "@material-tailwind/react";
+  import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
   import { Link } from "react-router-dom";
+import { AuthContext } from "../../AllContexts/UserContext";
+
+  
    
   export default function SignInPage() {
 
-    const { register, handleSubmit, reset, setValue,formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    
+    const {signInUser,user}=useContext(AuthContext);
 
+    const notify = () => toast("Successfully logged in");  
+  
     const onSubmit =(data)=>{
+      const {email,password}=data;
 
-      fetch('http://localhost:5000/login',{
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-
-    })
-    .catch((error)=>{
-      console.error(error);
-    })
+     signInUser(email,password)
+     .then((userCredential)=>{
+      const user=userCredential.user;
+      if(user){
+        notify()
+      }
+      reset();
+      console.log(user);
+     })
+     .catch((error)=>{
+      const errorMessage =error.message;
+      if(errorMessage){
+        alert(errorMessage)
+      }
+      console.log(errorMessage);
+     })
 
 
         console.log(data);
@@ -57,7 +68,7 @@ import { useForm } from "react-hook-form";
             />
           </div>
           
-          <Button type="submit" className="mt-6" fullWidth>
+          <Button disabled={user && true} type="submit" className="mt-6" fullWidth>
             Log In
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
@@ -71,6 +82,7 @@ import { useForm } from "react-hook-form";
           </Typography>
         </form>
       </Card>
+      <ToastContainer />
       </div>
     );
   }

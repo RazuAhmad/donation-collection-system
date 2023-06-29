@@ -5,12 +5,21 @@ import {
   Navbar,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.png";
+import { AuthContext } from "../../AllContexts/UserContext";
 
 export default function NavigationBar() {
   const [openNav, setOpenNav] = React.useState(false);
+
+  const { user, userLogOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    userLogOut()
+      .then(() => {})
+      .catch((error) => alert(error));
+  };
 
   React.useEffect(() => {
     window.addEventListener(
@@ -90,8 +99,9 @@ export default function NavigationBar() {
                 variant=""
                 size="md"
                 className="hidden lg:inline-block hover:bg-red-600"
+                onClick={user?.email && handleLogOut}
               >
-                <span>Sign Up</span>
+                <span>{user?.email ? "Log Out" : "Sign Up"}</span>
               </Button>
             </Link>
             <IconButton
@@ -141,9 +151,9 @@ export default function NavigationBar() {
               variant="gradient"
               size="md"
               className="mb-2 hover:bg-green-400"
-              onClick={() => setOpenNav(!openNav)}
+              onClick={user?.email ? handleLogOut : () => setOpenNav(!openNav)}
             >
-              <span>Sign Up</span>
+              <span>{user?.email ? "Log Out" : "Sign Up"}</span>
             </Button>
           </Link>
         </MobileNav>

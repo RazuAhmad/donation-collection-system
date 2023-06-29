@@ -5,29 +5,55 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../AllContexts/UserContext";
  
 export default function RegisterPage() {
 
-  const { register, handleSubmit, reset, setValue,formState: { errors } } = useForm();
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
+  const {createUser,user,setUser,signInWithGoogle}=useContext(AuthContext);
+// console.log("createUser",createUser);
+
+const notify = () => toast("Successfully registered");
 
   const onSubmit =(data)=>{
 
-    fetch('http://localhost:5000/register',{
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
+   const {name,email,password}=data;
 
+    createUser(email,password)
+    .then((userCredentials)=>{
+      const user=userCredentials.user;
+      user.displayName=name;
+      if(user){
+        notify();
+        setUser(user);
+        reset()
+      }
+      console.log(user);
     })
 
-    console.log(data);
+    .catch((error)=>{
+      const errorMessage =error.message;
+      if(errorMessage){
+        alert("email-already-in-use")
+      }
+      console.log(errorMessage);
+    })
+}
+
+const handleSignInWithGoogle=()=>{
+  signInWithGoogle()
+  .then(result=>{
+    const user=result.user;
+    if(user){
+      notify();
+    }
+  })
+  .catch(error=>alert(error))
 }
 
 
@@ -71,7 +97,7 @@ export default function RegisterPage() {
           }
           containerProps={{ className: "-ml-2.5" }}
         />
-        <Button type="submit" className="mt-6" fullWidth>
+        <Button disabled={user && true} type="submit" className="mt-6" fullWidth>
           Register
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
@@ -83,8 +109,23 @@ export default function RegisterPage() {
             Sign In
           </Link>
         </Typography>
+        
       </form>
+      <div className="flex m-auto items-center mt-4">
+          <p className="bg-white w-14 md:w-40 h-0.5 "></p>
+          <p className="mx-5">OR</p>
+          <p className="bg-white w-14 md:w-40 h-0.5"></p>
+        </div>
+        <div className="m-auto">
+        
+           <Button disabled={user && true} type="submit" className="mt-3 bg-deep-orange-700 hover:bg-green-600 w-70% md:w-72 " onClick={handleSignInWithGoogle}>
+          Sign up with Google
+        </Button>
+        
+        </div>
     </Card>
+    
+    <ToastContainer />
     </div>
   );
 }

@@ -16,6 +16,8 @@ function DonationForm() {
     data.date = currentDate.toLocaleDateString();
     data.time = currentDate.toLocaleTimeString();
 
+
+    // data post from client side:::(Create operation done)
     fetch("http://localhost:5000/donators", {
       method: "POST",
       headers: {

@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.69d8e250.css",
+    "main.js": "/static/js/main.f6802f13.js",
+    "static/js/787.6800da3e.chunk.js": "/static/js/787.6800da3e.chunk.js",
+    "static/media/slide-1.jpg": "/static/media/slide-1.1368e7f62a466b9191b1.jpg",
+    "static/media/slide-3.jpg": "/static/media/slide-3.5ca5f3137bae9c48e490.jpg",
+    "static/media/slide-2.jpg": "/static/media/slide-2.8087bc7fa5b060f1d3eb.jpg",
+    "static/media/emergency-flood-rescue-fund.jpg": "/static/media/emergency-flood-rescue-fund.9c0218cf5e58e9744aaa.jpg",
+    "static/media/zakat.jpg": "/static/media/zakat.a20839a8ec5d1c8b7bdd.jpg",
+    "static/media/assunnah-mosque-complex.jpg": "/static/media/assunnah-mosque-complex.d64f7ad28a370737ae88.jpg",
+    "static/media/logo.png": "/static/media/logo.fba0eb8a2721381494ae.png",
+    "index.html": "/index.html",
+    "main.69d8e250.css.map": "/static/css/main.69d8e250.css.map",
+    "main.f6802f13.js.map": "/static/js/main.f6802f13.js.map",
+    "787.6800da3e.chunk.js.map": "/static/js/787.6800da3e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69d8e250.css",
+    "static/js/main.f6802f13.js"
+  ]
+}
