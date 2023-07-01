@@ -16,7 +16,7 @@ export default function RegisterPage() {
 
   const { register, handleSubmit,reset, formState: { errors } } = useForm();
   const {createUser,user,setUser,signInWithGoogle}=useContext(AuthContext);
-// console.log("createUser",createUser);
+  
 
 const notify = () => toast("Successfully registered");
 
@@ -31,7 +31,8 @@ const notify = () => toast("Successfully registered");
       if(user){
         notify();
         setUser(user);
-        reset()
+        reset();
+        
       }
       console.log(user);
     })
@@ -43,6 +44,8 @@ const notify = () => toast("Successfully registered");
       }
       console.log(errorMessage);
     })
+    
+
 }
 
 const handleSignInWithGoogle=()=>{

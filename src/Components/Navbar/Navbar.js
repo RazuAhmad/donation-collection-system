@@ -45,18 +45,15 @@ export default function NavigationBar() {
       </Link>
 
       {/* This is donationSummary nav link */}
-      <Link to="/donationSummary">
-        <Typography
-          as="li"
-          variant="medium"
-          color="blue-gray"
-          className="p-1 font-bold hover:underline-offset-2"
-        >
-          <a href="/" className="flex items-center">
-            Donation Summary
-          </a>
-        </Typography>
-      </Link>
+
+      <Typography
+        as="li"
+        variant="medium"
+        color="blue-gray"
+        className="p-1 font-bold hover:underline-offset-2"
+      >
+        <Link to="/summary"> Donation Summary</Link>
+      </Typography>
 
       {/* This is ALl Donators nav link */}
       <Link to="/allDonators">
@@ -73,7 +70,7 @@ export default function NavigationBar() {
       </Link>
 
       {/* This is donate now button */}
-      <Link to="/donateNow">
+      <Link to="/donatenow">
         <Button
           variant=""
           size="md"

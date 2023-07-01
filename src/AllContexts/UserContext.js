@@ -27,11 +27,12 @@ const signInUser=(email,password)=>{
 // get the current logged in user:::
 useEffect(()=>{
    const unsubscribe= onAuthStateChanged(auth,(currentUser)=>{
-        setUser(currentUser)
+        setUser(currentUser);
+        setLoading(false)
     })
     return ()=>{
         unsubscribe()
-    }
+    }       
 },[])
 
 // Sign in with google::

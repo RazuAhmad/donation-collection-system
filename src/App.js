@@ -11,6 +11,7 @@ import RegisterPage from "./Components/RegisterPage/RegisterPage";
 import SignInPage from "./Components/SignInPage/SignInPage";
 import UserContext from "./AllContexts/UserContext";
 import PrivateRoute from "./Routes/PrivateRoute";
+import AllDonators from "./Components/AllDonators/AllDonators";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/donationSummary" element={<DonationSummary />} />
-          {/* <Route path="/allDonators" element={<AllDonators />} /> */}
+          <Route path="/allDonators" element={<AllDonators />} />
           <Route
             path="/donateNow/:id"
             element={
@@ -30,6 +31,7 @@ function App() {
               </PrivateRoute>
             }
           />
+
           <Route
             path="/donateNow"
             element={
@@ -38,6 +40,16 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/summary"
+            element={
+              <PrivateRoute>
+                <DonationSummary />
+              </PrivateRoute>
+            }
+          />
+
           <Route path="/registerNow" element={<RegisterPage />} />
           <Route path="/signIn" element={<SignInPage />} />
         </Routes>

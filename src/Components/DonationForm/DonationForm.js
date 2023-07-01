@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, useParams } from "react-router-dom";
 import Typewriter from "typewriter-effect";
+import { AuthContext } from "../../AllContexts/UserContext";
 
 function DonationForm() {
   const { register, handleSubmit, reset, setValue, control } = useForm();
+  const { user } = useContext(AuthContext);
+
   const { id } = useParams();
 
-  const notify = () => toast("Successfully recieved donation");
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const currentDate = new Date();
     data.date = currentDate.toLocaleDateString();
     data.time = currentDate.toLocaleTimeString();
-
+    data.email = user?.email;
+    data.name = user?.displayName;
 
     // data post from client side:::(Create operation done)
     fetch("http://localhost:5000/donators", {
@@ -28,7 +30,8 @@ function DonationForm() {
       .then((res) => res.json())
       .then((dataConfirmation) => {
         if (dataConfirmation.acknowledged) {
-          notify();
+          alert("Your donation has been Successful");
+          navigate("/summary");
         }
       });
 
@@ -52,39 +55,35 @@ function DonationForm() {
         </h3>
       </div>
 
-      <ToastContainer />
-
       {/* Form starts from here */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-md mx-auto bg-white p-8 shadow-md rounded-md"
       >
         <div className="mb-4">
-          <label htmlFor="name" className="block mb-2 font-bold">
-            Name
+          <label htmlFor="category" className="block mb-2 font-medium">
+            Payment Method
           </label>
-          <input
-            type="text"
-            id="name"
-            placeholder="enter your name"
-            className="w-full border border-blue-900 rounded px-3 py-2"
-            {...register("name")}
-            required
+
+          <Controller
+            name="paymentMethod"
+            control={control}
+            render={({ field }) => (
+              <select
+                required
+                {...field}
+                className="w-full border border-blue-900 rounded px-3 py-2"
+              >
+                <option value="">Select category</option>
+                <option value="bkash">Bkash</option>
+                <option value="rocket">Rocket</option>
+                <option value="nagad">Nagad</option>
+                <option value="paypal">Paypal</option>
+              </select>
+            )}
           />
         </div>
-        {/* <div className="mb-4">
-          <label htmlFor="email" className="block mb-2 font-medium">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            placeholder="enter your email"
-            className="w-full border border-blue-900 rounded px-3 py-2"
-            {...register("email")}
-            required
-          />
-        </div> */}
+
         <div className="mb-4">
           <label htmlFor="category" className="block mb-2 font-medium">
             Category of Donation
@@ -117,6 +116,7 @@ function DonationForm() {
             id="amount"
             placeholder="enter your amount"
             className="w-full border border-blue-900 rounded px-3 py-2"
+            min="100"
             {...register("amount")}
             required
           />

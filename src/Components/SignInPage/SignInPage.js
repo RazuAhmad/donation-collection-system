@@ -18,6 +18,7 @@ import { AuthContext } from "../../AllContexts/UserContext";
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
     const {signInUser,user}=useContext(AuthContext);
+    
 
     const notify = () => toast("Successfully logged in");  
   
@@ -28,10 +29,11 @@ import { AuthContext } from "../../AllContexts/UserContext";
      .then((userCredential)=>{
       const user=userCredential.user;
       if(user){
-        notify()
+        notify();
+        
       }
       reset();
-      console.log(user);
+      
      })
      .catch((error)=>{
       const errorMessage =error.message;
@@ -49,7 +51,7 @@ import { AuthContext } from "../../AllContexts/UserContext";
       <div className="bg-blend-darken">
         <Card color="transparent" shadow={false} className="py-10 ">
         <Typography variant="h4" color="white" className="text-center">
-          Log In Now
+          You have to log In First
         </Typography>
         <Typography color="white" className="mt-1 font-normal text-center">
           Enter your Email & Password to Log In.
