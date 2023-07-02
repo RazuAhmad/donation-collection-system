@@ -74,7 +74,7 @@ export default function NavigationBar() {
         <Button
           variant=""
           size="md"
-          className=" lg:inline-block bg-orange-400 hover:bg-green-800"
+          className=" lg:inline-block bg-red-600 hover:bg-green-800"
         >
           <span>Donate Now</span>
         </Button>
@@ -158,14 +158,3 @@ export default function NavigationBar() {
     </>
   );
 }
-
-/*
-<Typography
-            as="a"
-            href="#"
-            className=" cursor-pointer py-1.5 font-medium"
-          >
-            Donation System
-          </Typography>
-
-*/

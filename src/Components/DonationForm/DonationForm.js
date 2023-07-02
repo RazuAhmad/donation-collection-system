@@ -35,7 +35,7 @@ function DonationForm() {
         }
       });
 
-    console.log(data);
+    reset();
   };
 
   return (

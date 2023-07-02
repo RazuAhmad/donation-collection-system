@@ -26,8 +26,8 @@ const AboutUs = () => {
             <h1 className=" text-white font-serif font-extrabold text-4xl mb-3">
               About us
             </h1>
-            <p className="">Lorem ipsum dolar</p>
-            <p> sit amet consectetur adipisicing temporibus.</p>
+            <p>We are continuously</p>
+            <p>Puting effort to revive the ummah</p>
           </div>
           {/* About us ended */}
 
@@ -40,13 +40,13 @@ const AboutUs = () => {
             <div className="flex">
               <p className="mt-2">
                 <input
-                  type="text"
+                  type="email"
                   className="placeholder-black "
                   placeholder="Email"
                 />
               </p>
-              <p className="mt-4 ">
-                <i className="text-red-60 fas fa-arrow-right cursor-pointer "></i>
+              <p className="mt-2 ">
+                <i className="text-red-500 fas fa-arrow-right cursor-pointer "></i>
               </p>
             </div>
           </div>
@@ -77,7 +77,7 @@ const AboutUs = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              As Sunnah Foundation
+              Ummah Relief
             </a>
           </span>
         </p>

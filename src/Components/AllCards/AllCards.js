@@ -16,6 +16,9 @@ import { Link } from "react-router-dom";
 
   export default function AllCards() {
     return (
+      <>
+      <h1 className="text-white font-bold text-center text-xl md:text-3xl mt-4">Our Ongoing Campaigns</h1>
+
       <div className="flex justify-center flex-wrap md:items-center md:justify-evenly">
 
         {/* First card */}
@@ -86,5 +89,6 @@ import { Link } from "react-router-dom";
         </CardFooter>
       </Card>
       </div>
+      </>
     );
   }

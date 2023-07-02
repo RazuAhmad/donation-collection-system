@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Asap+Condensed:ital,wght@1,500&display=swap");
+
+.text-font {
+  font-family: "Dancing Script", cursive;
+}
+
+.text-heading {
+  font-family: "Asap Condensed", sans-serif;
+}
+
+.volunteer-bg {
+  background: rgb(10, 10, 10);
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 10, 1) 16%,
+    rgba(39, 148, 98, 1) 47%,
+    rgba(24, 54, 142, 1) 80%
+  );
+}
