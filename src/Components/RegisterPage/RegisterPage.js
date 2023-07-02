@@ -5,11 +5,9 @@ import {
   Input,
   Typography,
 } from "@material-tailwind/react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AllContexts/UserContext";
  
 export default function RegisterPage() {
@@ -17,8 +15,7 @@ export default function RegisterPage() {
   const { register, handleSubmit,reset, formState: { errors } } = useForm();
   const {createUser,user,setUser,signInWithGoogle}=useContext(AuthContext);
   
-
-const notify = () => toast("Successfully registered");
+const navigate =useNavigate();
 
   const onSubmit =(data)=>{
 
@@ -28,10 +25,12 @@ const notify = () => toast("Successfully registered");
     .then((userCredentials)=>{
       const user=userCredentials.user;
       user.displayName=name;
+
       if(user){
-        notify();
         setUser(user);
+        alert("Successfully registered");
         reset();
+        navigate('/donatenow')
         
       }
       // console.log(user);
@@ -53,7 +52,8 @@ const handleSignInWithGoogle=()=>{
   .then(result=>{
     const user=result.user;
     if(user){
-      notify();
+      alert("Successfully registered");
+      navigate('/donatenow')
     }
   })
   .catch(error=>alert(error))
@@ -128,7 +128,6 @@ const handleSignInWithGoogle=()=>{
         </div>
     </Card>
     
-    <ToastContainer />
     </div>
   );
 }

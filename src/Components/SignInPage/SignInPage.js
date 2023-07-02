@@ -4,11 +4,9 @@ import {
     Input,
     Typography,
   } from "@material-tailwind/react";
-  import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-  import { Link } from "react-router-dom";
+  import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AllContexts/UserContext";
 
   
@@ -19,9 +17,8 @@ import { AuthContext } from "../../AllContexts/UserContext";
     
     const {signInUser,user}=useContext(AuthContext);
     
+    const navigate=useNavigate();
 
-    const notify = () => toast("Successfully logged in");  
-  
     const onSubmit =(data)=>{
       const {email,password}=data;
 
@@ -29,8 +26,8 @@ import { AuthContext } from "../../AllContexts/UserContext";
      .then((userCredential)=>{
       const user=userCredential.user;
       if(user){
-        notify();
-        
+        alert("Successfully logged in")
+        navigate('/donateNow')
       }
       reset();
       
@@ -84,7 +81,6 @@ import { AuthContext } from "../../AllContexts/UserContext";
           </Typography>
         </form>
       </Card>
-      <ToastContainer />
       </div>
     );
   }
