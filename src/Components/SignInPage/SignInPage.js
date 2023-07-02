@@ -40,11 +40,11 @@ import { AuthContext } from "../../AllContexts/UserContext";
       if(errorMessage){
         alert(errorMessage)
       }
-      console.log(errorMessage);
+      // console.log(errorMessage);
      })
 
 
-        console.log(data);
+        // console.log(data);
     }
 
     return (

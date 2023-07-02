@@ -34,7 +34,7 @@ const notify = () => toast("Successfully registered");
         reset();
         
       }
-      console.log(user);
+      // console.log(user);
     })
 
     .catch((error)=>{
@@ -42,7 +42,7 @@ const notify = () => toast("Successfully registered");
       if(errorMessage){
         alert("email-already-in-use")
       }
-      console.log(errorMessage);
+      // console.log(errorMessage);
     })
     
 

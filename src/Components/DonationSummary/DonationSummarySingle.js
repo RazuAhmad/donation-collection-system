@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 function DonationSummarySingle({
@@ -10,9 +10,12 @@ function DonationSummarySingle({
     specificDonatorDetails;
 
   const handleDeleteItem = (id) => {
-    fetch(`http://localhost:5000/donators/deleteSingleItem/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://donation-collection-server-production.up.railway.app/donators/deleteSingleItem/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

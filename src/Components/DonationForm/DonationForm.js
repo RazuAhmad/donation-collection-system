@@ -5,7 +5,7 @@ import Typewriter from "typewriter-effect";
 import { AuthContext } from "../../AllContexts/UserContext";
 
 function DonationForm() {
-  const { register, handleSubmit, reset, setValue, control } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
   const { user } = useContext(AuthContext);
 
   const { id } = useParams();
@@ -20,13 +20,16 @@ function DonationForm() {
     data.name = user?.displayName;
 
     // data post from client side:::(Create operation done)
-    fetch("http://localhost:5000/donators", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      "https://donation-collection-server-production.up.railway.app/donators",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((dataConfirmation) => {
         if (dataConfirmation.acknowledged) {

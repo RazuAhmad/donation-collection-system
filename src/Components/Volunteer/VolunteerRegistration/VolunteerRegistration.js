@@ -16,7 +16,7 @@ const VolunteerRegistration = () => {
   const onSubmit = (data) => {
 
     // data post from client side:::(Create operation done)
-    fetch("http://localhost:5000/volunteers", {
+    fetch("https://donation-collection-server-production.up.railway.app/volunteers", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,7 +31,7 @@ const VolunteerRegistration = () => {
         }
       });
 
-    console.log(data); 
+    // console.log(data); 
   };
 
   return (
@@ -46,7 +46,7 @@ const VolunteerRegistration = () => {
             <input
               type="text"
               id="name"
-              className={`border border-gray-300 rounded w-full py-2 px-3 ${errors.name ? 'border-red-500' : ''}`}
+              className={`border border-black rounded w-full py-2 px-3 ${errors.name ? 'border-red-500' : ''}`}
               {...register('name', { required: true })}
             />
             {errors.name && <span className="text-red-500 text-sm mt-1">Name is required</span>}
@@ -60,7 +60,7 @@ const VolunteerRegistration = () => {
               type="email"
               id="email"
               defaultValue={user?.email}
-              className={`border border-gray-300 rounded w-full py-2 px-3 ${errors.email ? 'border-red-500' : ''}`}
+              className={`border border-black rounded w-full py-2 px-3 ${errors.email ? 'border-red-500' : ''}`}
               {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
             />
             {errors.email && (
@@ -77,7 +77,7 @@ const VolunteerRegistration = () => {
             <input
               type="tel"
               id="phone"
-              className={`border border-gray-300 rounded w-full py-2 px-3 ${errors.phone ? 'border-red-500' : ''}`}
+              className={`border border-black rounded w-full py-2 px-3 ${errors.phone ? 'border-red-500' : ''}`}
               {...register('phone', { required: true,
                 pattern: /^[0-9()+-]*$/
             })}
@@ -91,7 +91,7 @@ const VolunteerRegistration = () => {
             </label>
             <textarea
               id="message"
-              className={`border border-gray-300 rounded w-full py-2 px-3 ${errors.message ? 'border-red-500' : ''}`}
+              className={`border border-black rounded w-full py-2 px-3 ${errors.message ? 'border-red-500' : ''}`}
               {...register('message', { required: true })}
             ></textarea>
             {errors.message && <span className="text-red-500 text-sm mt-1">Message is required</span>}

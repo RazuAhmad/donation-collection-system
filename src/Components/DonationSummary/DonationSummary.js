@@ -8,7 +8,9 @@ function DonationSummary() {
 
   // finding specific donator using email::
   useEffect(() => {
-    fetch(`http://localhost:5000/email/${user?.email}`)
+    fetch(
+      `https://donation-collection-server-production.up.railway.app/email/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => setSpecificDonator(data));
   }, [user?.email]);

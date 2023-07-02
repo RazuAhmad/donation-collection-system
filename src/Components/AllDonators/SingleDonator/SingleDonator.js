@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function SingleDonator({ donatorDetails }) {
   const { email, date, time, donationCategory, amount } = donatorDetails;

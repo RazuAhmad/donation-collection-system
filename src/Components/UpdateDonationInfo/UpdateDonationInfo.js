@@ -1,19 +1,16 @@
 import { Spinner } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
-import { useForm,Controller } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 function UpdateDonationInfo() {
 const [specificDonators,setspecificDonators]=useState({})
-  const { register, handleSubmit, reset, control } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const {id}=useParams();
   
-  const notify = () => toast("Your Information is updated");
-
+  const navigate=useNavigate();
   
   useEffect(()=>{
-    fetch(`http://localhost:5000/donators/${id}`)
+    fetch(`https://donation-collection-server-production.up.railway.app/donators/${id}`)
     .then(res=>res.json())
     .then(data=>
       setspecificDonators(data)
@@ -36,7 +33,7 @@ const [specificDonators,setspecificDonators]=useState({})
     data.name = name?.displayName;
 // console.log(data);
     // Update data method here::
-    fetch(`http://localhost:5000/donators/${id}`,{
+    fetch(`https://donation-collection-server-production.up.railway.app/donators/${id}`,{
           method:"PUT",
           headers: {
             'content-type': 'application/json'
@@ -48,9 +45,10 @@ const [specificDonators,setspecificDonators]=useState({})
           // console.log(data);
 
           if(data.modifiedCount>0 ){
-            notify();
+            alert("Your Information has been updated")
 
-            reset()
+            reset();
+            navigate('/summary')
             
           }
 
@@ -148,7 +146,6 @@ const [specificDonators,setspecificDonators]=useState({})
           Update
         </button>
       </form>
-      <ToastContainer />
 
     </div>
   )

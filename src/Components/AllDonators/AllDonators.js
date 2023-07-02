@@ -5,7 +5,7 @@ function AllDonators() {
   const [allDonatorsList,setAllDonatorsList]=useState([]);
 
   useEffect(()=>{
-    fetch('http://localhost:5000/donators')
+    fetch('https://donation-collection-server-production.up.railway.app/donators')
     .then(res=>res.json())
     .then(data=>setAllDonatorsList(data))
   },[])
